@@ -1,38 +1,33 @@
-//import $ from 'jquery';
+import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import './../css/styles.css';
 import CurrencyExchange from './currency.js';
 
-function callCurrency(response) {
+function callCurrency(response, currencyToConvert) {
   let exchangeOutcome;
   let errorResponse;
   if (response.result === "success") {
-    exchangeOutcome = response.conversion_rates["EUR"];
+    exchangeOutcome = response.conversion_rates[currencyToConvert];
     return exchangeOutcome;
   } else {
     errorResponse = response["error-type"];
     return errorResponse;
   }
-
 }
 
-async function makeApiCall() {
+async function makeApiCall(currencyToConvert) {
   const response = await CurrencyExchange.callForCurrency();
-  let temp = callCurrency(response);
-  console.log(temp);
-  return temp;
+  return callCurrency(response, currencyToConvert);
 }
-const testF = makeApiCall();
-console.log(testF);
-// function runTest() {
-//   let testAtt = makeApiCall();
-//   console.log(testAtt);
-//   return testAtt;
-// }
-// let testCase = runTest();
-// console.log(testCase);
 
-// $(document).ready(function() {
-
-// });
+$(document).ready(function() {
+  $('#currencySelect').submit(async function(event) {
+    event.preventDefault();
+    const currencyToConvert = $('#conversionRate').val();
+    const dollars = parseInt($('#dollars').val());
+    const conversion = await makeApiCall(currencyToConvert);
+    console.log(dollars);
+    console.log(conversion);
+  });
+});
