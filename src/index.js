@@ -29,5 +29,6 @@ $(document).ready(function() {
     const conversion = await makeApiCall(currencyToConvert);
     console.log(dollars);
     console.log(conversion);
+    $('#displayHere').html("That conververts to " + (conversion*dollars) + " " + currencyToConvert + ".");
   });
 });
