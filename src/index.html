@@ -9,8 +9,21 @@
     <h1>Currency Exchange! Change your dollars to other currencies!</h1>
     <form id="currencySelect">
       <div class="form-group">
-        
+        <label for="conversionRate">Select your currency:</label>
+        <select class="form-control" id="conversionRate">
+          <option>EUR</option>
+          <option>JPY</option>
+          <option>BRL</option>
+          <option>CAD</option>
+          <option>KPW</option>
+          <option>PHP</option>
+        </select>
       </div>
+      <div class="form-group">
+        <label for="dollars">How many dollars would you like to convert?</label>
+        <input type="number" min="0" id="dollars" required>
+      </div>
+      <button class="btn btn-primary" type="submit">Submit!</button>
     </form>
   </div>
 </body>
